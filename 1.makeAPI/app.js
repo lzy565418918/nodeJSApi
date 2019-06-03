@@ -14,6 +14,9 @@ const upload = multer({
     dest: 'uploads/'
 })
 
+//静态托管，将html页面暴露出去，成为可访问
+app.use(express.static('public'))
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -56,6 +59,8 @@ app.get('/list', (req, res) => {
 
 //注册路由  新增英雄信息，有参数（icon,name,skill） post  formData
 app.post('/add', upload.single('icon'), (req, res) => {
+    console.log(req.flie);
+
     const icon = req.file.path
     const {
         name,
@@ -83,7 +88,7 @@ app.post('/add', upload.single('icon'), (req, res) => {
 //注册路由  删除英雄信息，有参数 id get
 app.get('/delete', (req, res) => {
     const id = req.query.id
-    if (db.deleteHerobyId(id)) {
+    if (db.deleteHeroById(id)) {
         res.send({
             msg: '删除成功',
             code: 200
@@ -100,15 +105,20 @@ app.get('/delete', (req, res) => {
 //注册路由  根据id查找英雄，有参数id get
 app.get('/search', (req, res) => {
     const id = req.query.id
-    if (db.getHeroById(id)) {
+    const data = db.getHeroById(id)
+    console.log(data);
+
+    if (data) {
         res.send({
             msg: '查找成功',
-            code: 200
+            code: 200,
+            data,
         })
     } else {
         res.send({
             msg: '查找失败',
             code: 400
+
         })
     }
 })
@@ -124,6 +134,7 @@ app.post('/edit', upload.single('icon'), (req, res) => {
         id
     } = req.body
     if (db.editHero({
+            id,
             name,
             skill,
             icon
