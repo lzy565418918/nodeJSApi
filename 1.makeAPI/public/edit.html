@@ -168,7 +168,7 @@
         // $('#skillName').val(backData.data.skill)
 
         //给img的src属性赋值为icon的值
-        $('.preview').attr('src', backData.data.icon)
+        $('.preview').attr('src', backData.data.icon.split('\\')[1])
         for (const key in backData.data) {
           $('input[name=' + key + ']').val(backData.data[key])
         }

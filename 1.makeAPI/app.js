@@ -16,6 +16,7 @@ const upload = multer({
 
 //静态托管，将html页面暴露出去，成为可访问
 app.use(express.static('public'))
+app.use(express.static('uploads'))
 
 
 // parse application/x-www-form-urlencoded
