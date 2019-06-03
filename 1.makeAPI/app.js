@@ -3,11 +3,15 @@ const express = require('express')
 const app = express()
 //使接口有解析post的功能
 var bodyParser = require('body-parser')
+//导路径包
+const path = require('path')
+//导数据
+const db = require(path.join(__dirname,'utils','db.js'))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
-//注册路由
+//注册路由  用户登录  有参数  post
 app.post('/login', (req, res) => {
     //获取请求参数
     const { username, password } = req.body
@@ -25,5 +29,19 @@ app.post('/login', (req, res) => {
         })
     }
 })
+
+
+//获取英雄列表，无参数  get  
+app.get('/list', (req, res) => {
+    //导入已经写好的数据，调用db的getheros方法
+    const data = db.getHeros()
+    res.send({
+        msg: '获取成功',
+        code: 200,
+        data
+    })
+})
+
+
 //开启监听
 app.listen(3000, () => console.log('success'))
