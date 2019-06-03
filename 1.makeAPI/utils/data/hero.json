@@ -1,9 +1,1 @@
-[
-  {
-    "id": 1,
-    "name": "罗伯特",
-    "skill": "飞起来",
-    "icon": "/imgs/盖伦.png",
-    "isDelete": false
-  }
-]
+[{"id":1,"name":"罗伯特","skill":"飞起来","icon":"/imgs/盖伦.png","isDelete":false},{"id":2,"name":"jck","skill":"123","isDelete":false},{"id":3,"name":"张获悉","skill":"five","icon":"uploads\\58f54599891e4bd9dc448ed407251c63","isDelete":false}]
